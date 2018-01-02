@@ -18,7 +18,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -28,7 +27,6 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            'signature:X-Application-Name',
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -39,9 +37,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'cors',
-            'signature:X-Application-Name',
-            'throttle:10,1',
+            'throttle:60,1',
             'bindings',
         ],
     ];
@@ -58,13 +54,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'cors' => \Barryvdh\Cors\HandleCors::class,
-        'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \App\Http\Middleware\CustomThrottleRequests::class,
-        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
-        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
-        'signature' => \App\Http\Middleware\SignatureMiddleware::class,
-        'transform.input' => \App\Http\Middleware\TransformInput::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

@@ -7,11 +7,11 @@ keys:
     - ~/.ssh/id_rsa
 folders:
     -
-        map: 'C:\RESTfulAPI'
+        map: 'C:\Users\odette.simons\RESTfullAPI\RESTfullAPI'
         to: /home/vagrant/restfulapi
 sites:
     -
-        map: restfulapi.dev
+        map: restfulapi.me
         to: /home/vagrant/restfulapi/public
 databases:
     - homestead
